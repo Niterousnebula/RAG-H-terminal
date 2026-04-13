@@ -128,14 +128,6 @@ This project prioritizes simplicity and performance. Instead of complex multi-ag
 
 ## License
 
-MIT License
 
-You can now:
 
-Open README.md
-Paste this
-Save
-Run:
-git add README.md
-git commit -m "update README"
-git push
+
