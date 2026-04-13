@@ -8,7 +8,7 @@ RAG-H Terminal is a minimal, high-performance local AI coding assistant built ar
 
 - Single-file style backend design  
 - Local GGUF model support (Qwen, Mistral, etc.)  
-- Streaming responses (token-by-token output)  
+- Streaming responses (token-by-token output and Tps)  
 - File upload support  
 - OCR support for images  
 - Automatic continuation for long outputs  
