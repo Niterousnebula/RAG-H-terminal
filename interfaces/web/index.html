@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP // Terminal</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/dracula.min.css">
+</head>
+<body class="crt-effect">
+    <div id="loading-screen" class="loading-screen">
+        <div class="glitch-text">INITIALIZING_MCP</div>
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div id="loading-status" class="status-text">Awaiting /health validation...</div>
+    </div>
+
+    <div id="app-container" class="app-container hidden">
+        <header class="terminal-header">
+<pre class="cyber-glow">
+██████╗  █████╗  ██████╗       ██╗  ██╗
+██╔══██╗██╔══██╗██╔════╝       ██║  ██║
+██████╔╝███████║██║  ███╗█████╗███████║
+██╔══██╗██╔══██║██║   ██║╚════╝██╔══██║
+██║  ██║██║  ██║╚██████╔╝      ██║  ██║
+╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝       ╚═╝  ╚═╝
+                                   
+████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗     
+╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║     
+   ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║███████║██║     
+   ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██╔══██║██║     
+   ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██║  ██║███████╗
+   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝
+   
+SYSTEM STATUS: [OK] | ENCRYPTION: [ENABLED] | AGENTS: [LISTENING]
+</pre>
+        </header>
+
+        <main id="chat-box" class="chat-window">
+            <div class="message system">
+                <div class="message-content">
+                    [SYS_INIT] - WebSocket channel opened. Secure link established.
+                </div>
+            </div>
+        </main>
+
+        <div class="input-container">
+            <div class="file-preview" id="file-preview"></div>
+            <div class="input-box">
+                <span class="prompt-char">user@mcp:~$</span>
+                
+                <input type="file" id="file-upload" style="display: none;">
+                <button id="upload-btn" class="cyber-btn" title="Upload File">
+                    [UP]
+                </button>
+                
+                <textarea 
+                    id="input" 
+                    class="cyber-input"
+                    placeholder="Type command or message... (Shift+Enter multiline)" 
+                    rows="1"
+                    autocomplete="off"
+                ></textarea>
+                
+                <button id="send-btn" class="cyber-btn action-btn" title="Execute command">
+                    [EXEC]
+                </button>
+                <button id="stop-button" class="cyber-btn stop-btn" title="Abort transmission" style="display: none;">
+                    [STOP]
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>

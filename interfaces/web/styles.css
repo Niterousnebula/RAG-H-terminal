@@ -1,0 +1,293 @@
+/* Base Reset & Cyberpunk Terminal Variables */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+:root {
+    --bg-base: #000000;
+    --bg-surface: #050505;
+    --bg-assistant: #0a0a0a;
+    
+    /* Hacker Green overrides the cyan */
+    --theme-color: #00ff00;
+    --theme-dim: rgba(0, 255, 0, 0.2);
+    --theme-glow: 0 0 10px rgba(0, 255, 0, 0.4);
+    
+    /* Amber for User Input/Messages */
+    --color-amber: #ffb000;
+    --amber-dim: rgba(255, 176, 0, 0.05);
+    
+    --text-main: #00ff00; /* Default text is now green */
+    --text-dim: #008800;  /* Muted elements are dark green */
+    --error-color: #ff0000;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-shadow: 0 0 2px rgba(0, 255, 0, 0.3);
+}
+
+/* Loading Screen Constraints */
+.loading-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-base);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease;
+}
+
+.glitch-text {
+    font-size: 1.5rem;
+    color: var(--theme-color);
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    text-shadow: var(--theme-glow);
+}
+
+.progress-container {
+    width: 300px;
+    height: 2px;
+    background: #111;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--theme-color);
+    box-shadow: var(--theme-glow);
+    transition: width 0.2s linear;
+}
+
+.status-text {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* CRT/Scanline Effect */
+.crt-effect::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.03), rgba(0, 0, 255, 0.06));
+    z-index: 1000;
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+    opacity: 0.15;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-surface);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* Terminal Header */
+.terminal-header {
+    padding: 10px 2%;
+    border-bottom: 1px solid var(--theme-dim);
+    background: #000;
+    font-size: 0.8rem;
+    color: var(--theme-color);
+}
+
+.cyber-glow {
+    text-shadow: var(--theme-glow);
+    white-space: pre-wrap;
+    line-height: 1.1;
+}
+
+/* Chat Area */
+.chat-window {
+    flex: 1;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding-bottom: 120px;
+    padding-top: 10px;
+}
+
+.chat-window::-webkit-scrollbar { width: 6px; }
+.chat-window::-webkit-scrollbar-track { background: var(--bg-base); }
+.chat-window::-webkit-scrollbar-thumb { background: var(--text-dim); }
+
+/* Message Styles */
+.message {
+    padding: 15px 5%;
+    display: flex;
+    width: 100%;
+}
+
+.message-content {
+    max-width: 900px;
+    width: 100%;
+    line-height: 1.5;
+}
+
+.message.assistant {
+    background-color: var(--bg-assistant);
+    justify-content: flex-start;
+    color: var(--text-main);
+    border-left: 2px solid var(--text-dim);
+    border-bottom: 1px solid var(--theme-dim);
+}
+
+.message.user {
+    justify-content: flex-end;
+    color: var(--color-amber);
+    text-shadow: 0 0 2px rgba(255, 176, 0, 0.4);
+}
+
+.message.user .message-content {
+    text-align: right;
+    border-right: 2px solid var(--color-amber);
+    background: transparent; /* Changed to transparent */
+    padding: 10px 15px;
+}
+
+.message.system {
+    color: var(--text-dim);
+    justify-content: center;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Tags and Markdown */
+.model-tag {
+    color: var(--bg-base);
+    background-color: var(--theme-color);
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    display: inline-block;
+    box-shadow: var(--theme-glow);
+}
+
+.message-content pre {
+    border: 1px solid var(--text-dim);
+    background: #000 !important;
+    padding: 10px;
+    margin: 10px 0;
+    overflow-x: auto;
+}
+
+/* Input Area */
+.input-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 5%;
+    background-color: #000;
+    border-top: 2px solid var(--theme-dim);
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.8);
+}
+
+.input-box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.prompt-char {
+    color: var(--theme-color);
+    font-weight: bold;
+    text-shadow: var(--theme-glow);
+}
+
+.cyber-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--color-amber); /* Typing text is amber */
+    font-size: 1rem;
+    resize: none;
+    padding: 8px;
+    max-height: 150px;
+    outline: none;
+}
+
+.cyber-input::placeholder { color: var(--text-dim); opacity: 0.5; }
+
+.cyber-btn {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid transparent;
+    padding: 6px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.cyber-btn:hover:not(:disabled) {
+    color: var(--theme-color);
+    border-color: var(--theme-color);
+    box-shadow: var(--theme-glow);
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.action-btn {
+    color: var(--theme-color);
+    border-color: var(--text-dim);
+}
+
+.stop-btn { color: var(--error-color); border-color: #550000; }
+.stop-btn:hover:not(:disabled) {
+    color: #fff;
+    border-color: var(--error-color);
+    box-shadow: 0 0 10px var(--error-color);
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.cyber-btn:disabled, .cyber-input:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    background: transparent !important;
+}
+
+.file-preview {
+    font-size: 0.8rem;
+    color: var(--color-amber);
+    padding-left: 130px;
+    margin-bottom: 5px;
+    min-height: 1.2rem;
+}
+
+.typing-cursor::after {
+    content: '█';
+    animation: blink 0.8s step-start infinite;
+    color: var(--theme-color);
+    margin-left: 4px;
+}
+
+@keyframes blink { 50% { opacity: 0; } }

@@ -1,0 +1,30 @@
+fastapi
+uvicorn
+pydantic
+python-multipart
+pyinstaller
+
+# Document handling
+pandas
+python-docx
+PyPDF2
+pdfplumber
+pdfminer.six
+
+# Local LLM
+llama-cpp-python
+
+# Memory + embeddings
+faiss-cpu
+sentence-transformers
+scikit-learn
+scipy
+
+# Transformers stack
+transformers
+torch
+tqdm
+regex
+
+# Optional (better performance)
+numpy

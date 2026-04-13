@@ -1,0 +1,137 @@
+{
+  "project_name": "Local Multi-Agent LLM System",
+  "architecture": {
+    "controller": "DeepSeek (decision engine with JSON routing)",
+    "chat_model": "Mistral 7B Instruct (conversational)",
+    "code_model": "Qwen Coder (code generation)",
+    "memory": "FAISS + sentence-transformers (chunk-based retrieval)",
+    "tool_chain": "Sequential tool execution (PDF, code execution)",
+    "agents": "Parallel coder + critic system",
+    "interface": ["Web UI", "Streaming responses"]
+  },
+  "core_features": [
+    "JSON-based routing with guardrails",
+    "Model role separation (chat, code, reasoning)",
+    "Streaming + non-stream unified pipeline",
+    "Parallel agent execution (coder + critic)",
+    "Tool chaining system",
+    "Document upload support (PDF)",
+    "Chunking + embedding-based retrieval",
+    "Memory summarization (optional)",
+    "Model tagging in responses"
+  ],
+  "model_roles": {
+    "mistral": {
+      "role": "chat",
+      "behavior": [
+        "short responses",
+        "no explanation unless asked",
+        "conversational tone"
+      ]
+    },
+    "qwen": {
+      "role": "coder",
+      "behavior": [
+        "code only",
+        "no explanations"
+      ]
+    },
+    "deepseek": {
+      "role": "controller",
+      "behavior": [
+        "strict JSON output",
+        "deterministic decisions",
+        "no hallucinated tools/models"
+      ]
+    }
+  },
+  "memory_design": {
+    "type": "vector_store",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "chunking": {
+      "chunk_size": 500,
+      "overlap": 100
+    },
+    "retrieval": {
+      "top_k": 3,
+      "max_context_chars": 1000
+    },
+    "rules": [
+      "never send full document to LLM",
+      "always chunk before storing",
+      "clean text before chunking"
+    ]
+  },
+  "pdf_pipeline": {
+    "steps": [
+      "read_pdf",
+      "clean_text",
+      "chunk_text",
+      "store_in_faiss"
+    ],
+    "limits": {
+      "max_read_chars": 5000,
+      "chunk_size": 500,
+      "overlap": 100
+    }
+  },
+  "controller_logic": {
+    "flow": [
+      "input → process()",
+      "intent guard (greetings)",
+      "retrieve memory context",
+      "decision via DeepSeek",
+      "route to model/tool/agent",
+      "return response"
+    ],
+    "special_cases": [
+      "greetings handled manually",
+      "short conversational inputs bypass LLM complexity"
+    ]
+  },
+  "tool_chain": {
+    "supported_tools": [
+      "read_pdf",
+      "execute_code"
+    ],
+    "behavior": [
+      "sequential execution",
+      "safe input handling",
+      "chunk + store for documents"
+    ]
+  },
+  "generation_settings": {
+    "temperature": 0.2,
+    "top_p": 0.8,
+    "max_tokens": {
+      "chat": 100,
+      "code": 256,
+      "reasoning": 512
+    }
+  },
+  "known_issues_fixed": [
+    "hallucination on greetings",
+    "prompt override bug",
+    "GGML assert crash (context overflow)",
+    "PDF overload causing crashes",
+    "circular import in tool_chain",
+    "incorrect JSON routing",
+    "model role confusion"
+  ],
+  "design_principles": [
+    "LLMs should not handle trivial intents",
+    "never pass raw documents to models",
+    "separate roles across models",
+    "use deterministic routing (JSON)",
+    "limit context aggressively",
+    "prefer system control over prompt reliance"
+  ],
+  "future_upgrades": [
+    "semantic chunking",
+    "hierarchical memory",
+    "confidence scoring + retry",
+    "multi-document indexing",
+    "LangGraph migration (optional)",
+    "tool auto-selection via embeddings"
+  ]
+}

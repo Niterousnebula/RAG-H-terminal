@@ -1,0 +1,11 @@
+*.gguf 
+__pycache__/ 
+venv/ 
+uploads/ 
+build/ 
+dist/ 
+__pycache__/ 
+venv/ 
+uploads/ 
+*.pyc 
+*.gguf 
