@@ -124,10 +124,5 @@ This project prioritizes simplicity and performance. Instead of complex multi-ag
 - Performance depends on available RAM and CPU/GPU  
 - GPU acceleration is partially supported via llama.cpp  
 
----
-
-## License
-
-
 
 
